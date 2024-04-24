@@ -1,42 +1,39 @@
 package esercizioSistemaBancario;
+class ContoBancario {
 
-public class ContoBancario {
+    private String titolare;
+    private double saldo;
 
-	private String titolare;
-	private static double saldo;
+    public ContoBancario(String titolare, double saldo) {
+        this.titolare = titolare;
+        this.saldo = saldo;
+    }
 
-	public ContoBancario(String titolare, double saldo) {
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
 
-		this.titolare = titolare;
-		this.saldo = saldo;
-	}
+    public String getTitolare() {
+        return titolare;
+    }
 
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
+    public double getSaldo() {
+        return saldo;
+    }
 
-	public String getTitolare() {
-		return titolare;
-	}
+    public void deposita(double importo) {
+        System.out.println("Il tuo conto aggiornato è:" + (saldo += importo));
+    }
 
-	public double getSaldo() {
-		return saldo;
-	}
+    public void preleva(double importo) {
+        if (importo > saldo) {
+            System.out.println("Saldo insufficiente");
+        } else {
 
-	public static void deposita(double importo) {
-		saldo += importo;
-	}
-
-	public static void preleva(double importo) {
-		if (importo > saldo) {
-			System.out.println("Saldo insufficiente");
-		} else {
-			saldo -= importo;
-		}
-
-	}
-
-	
+            System.out.println("Il tuo conto aggiornato è:" + (saldo -= importo));
+        }
+    }
+}
 	
 	
 
