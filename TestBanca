@@ -1,85 +1,90 @@
 import java.util.Scanner;
-java.util.ArrayList;
+import java.util.ArrayList;
+
 
 public class TestBanca {
     public static void main(String[] args) {
         Banca banca = new Banca();
         Scanner s = new Scanner(System.in);
         boolean continua = true;
-    
+
         while (continua) {
             System.out.println("Ciao, come ti chiami?");
             String nomeTitolare = s.nextLine();
-    
-            ContoBancario conto = banca.getConto(nomeTitolare);
-            if (conto != null) {
-                System.out.println("Nome corretto, può accedere al suo conto.");
-    
-                while (true) {
-                    System.out.println("Cosa vuoi fare?");
-                    System.out.println("1. Effettuare un deposito");
-                    System.out.println("2. Effettuare un prelievo");
-                    System.out.println("3. Stampa saldi");
-                    System.out.println("4. Crea un conto di risparmio");
-                    System.out.println("5. Esci");
-    
-                    int scelta = s.nextInt();
-                    s.nextLine(); // Consuma il newline
-    
-                    switch (scelta) {
-                        case 1:
-                            System.out.println("Inserisci l'importo da depositare:");
-                            double importoDeposito = s.nextDouble();
-                            s.nextLine(); // Consuma il newline
-                            conto.deposita(importoDeposito);
-                            break;
-                        case 2:
-                            System.out.println("Inserisci l'importo da prelevare:");
-                            double importoPrelievo = s.nextDouble();
-                            s.nextLine(); // Consuma il newline
-                            conto.preleva(importoPrelievo);
-                            break;
-                        case 3:
-                            banca.stampaSaldi(nomeTitolare);
-                            break;
-                        case 4:
-                            System.out.println("Inserisci saldo iniziale:");
-                            double saldo = s.nextDouble();
-                            s.nextLine(); // Consuma il newline
-                            System.out.println("Inserisci il tasso di interesse:");
-                            double tassoInteresse = s.nextDouble();
-                            s.nextLine(); // Consuma il newline
-                            ContoRisparmio nuovoContoRisparmio = new ContoRisparmio(nomeTitolare, saldo, tassoInteresse);
-                            banca.aggiungiConto(nuovoContoRisparmio);
-                            System.out.println("Il nuovo conto di risparmio è stato creato con successo.");
-                            break;
-                        case 5:
-                            continua = false;
-                            break;
-                        default:
-                            System.out.println("Scelta non valida.");
+
+            try {
+                ContoBancario conto = banca.getConto(nomeTitolare);
+                if (conto != null) {
+                    System.out.println("Nome corretto, può accedere al suo conto.");
+
+                    while (true) {
+                        System.out.println("Cosa vuoi fare?");
+                        System.out.println("1. Effettuare un deposito");
+                        System.out.println("2. Effettuare un prelievo");
+                        System.out.println("3. Stampa saldi");
+                        System.out.println("4. Crea un conto di risparmio");
+                        System.out.println("5. Esci");
+
+                        int scelta = s.nextInt();
+                        s.nextLine(); 
+
+                        switch (scelta) {
+                            case 1:
+                                System.out.println("Inserisci l'importo da depositare:");
+                                double importoDeposito = s.nextDouble();
+                                s.nextLine(); 
+                                conto.deposita(importoDeposito);
+                                break;
+                            case 2:
+                                System.out.println("Inserisci l'importo da prelevare:");
+                                double importoPrelievo = s.nextDouble();
+                                s.nextLine();
+                                conto.preleva(importoPrelievo);
+                                break;
+                            case 3:
+                                banca.stampaSaldi(nomeTitolare);
+                                break;
+                            case 4:
+                                System.out.println("Inserisci saldo iniziale:");
+                                double saldo = s.nextDouble();
+                                s.nextLine(); 
+                                System.out.println("Inserisci il tasso di interesse:");
+                                double tassoInteresse = s.nextDouble();
+                                s.nextLine(); 
+                                ContoRisparmio nuovoContoRisparmio = new ContoRisparmio(nomeTitolare, saldo,
+                                        tassoInteresse);
+                                banca.aggiungiConto(nuovoContoRisparmio);
+                                System.out.println("Il nuovo conto di risparmio è stato creato con successo.");
+                                break;
+                            case 5:
+                                continua = false;
+                                break;
+                            default:
+                                System.out.println("Scelta non valida.");
+                        }
+
                     }
-    
-                    if (!continua)
-                        break;
-                }
-            } else {
-                System.out.println("Nome errato");
-                System.out.println("Vuoi creare un nuovo conto in questa banca? (si/no)");
-                String risposta = s.nextLine();
-    
-                if (risposta.equalsIgnoreCase("si")) {
-                    System.out.println("Inserisci saldo iniziale:");
-                    double saldo = s.nextDouble();
-                    s.nextLine(); // Consuma il newline
-                    ContoBancario nuovoConto = new ContoBancario(nomeTitolare, saldo);
-                    banca.aggiungiConto(nuovoConto);
-                    System.out.println("Il nuovo conto è stato creato con successo.");
                 } else {
-                    continua = false;
+                    System.out.println("Nome errato");
+                    System.out.println("Vuoi creare un nuovo conto in questa banca? (si/no)");
+                    String risposta = s.nextLine();
+
+                    if (risposta.equalsIgnoreCase("si")) {
+                        System.out.println("Inserisci saldo iniziale:");
+                        double saldo = s.nextDouble();
+                        s.nextLine(); 
+                        ContoBancario nuovoConto = new ContoBancario(nomeTitolare, saldo);
+                        banca.aggiungiConto(nuovoConto);
+                        System.out.println("Il nuovo conto è stato creato con successo.");
+                    } else {
+                        continua = false;
+                    }
                 }
+            } catch (Exception e) {
+                System.out.println("Errore durante l'inserimento dei parametri.");
+               
             }
         }
         s.close();
     }
-}    
+}
