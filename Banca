@@ -1,36 +1,47 @@
 package esercizioSistemaBancario;
 import java.util.ArrayList;
 
-public class Banca {
+class Banca {
+    private ArrayList<ContoBancario> contiBancari;
+    
 
-	 private ArrayList<ContoBancario> contiBancari;
-	
-	 public void aggiungiConto(ContoBancario conto) {
-		 
-		 contiBancari.add(conto);
-	 }
-	 
-	 public double getSaldoTotale() {
-		    double saldoTot = 0;
-		    
-		  
+    public Banca() {
+        contiBancari = new ArrayList<>();
+    }
 
-		    for(ContoBancario conto : contiBancari) {
-		        saldoTot += conto.getSaldo();
-		    }
-		    
-		    return saldoTot;
-		}
-	 
-	 
-	 
-	 public void stampaSaldi() {
-		 
-		 for(ContoBancario conto : contiBancari) {
-		        
-			 System.out.println("Il saldo del seguente conto è: " + conto.getSaldo() + ". Il titolare si chiama: "+ conto.getTitolare());
-		    }
-	 }
+    public ContoBancario getConto(String titolare) {
+        for (ContoBancario conto : contiBancari) {
+            if (conto.getTitolare().equals(titolare)) {
+                return conto;
+            }
+        }
+        return null; // Se non viene trovato nessun conto con il titolare specificato
+    }
+    
+    
+    public void aggiungiConto(ContoBancario conto) {
+        contiBancari.add(conto);
+    }
+
+    public double getSaldoTotale() {
+        double saldoTot = 0;
+        for (ContoBancario conto : contiBancari) {
+            saldoTot += conto.getSaldo();
+        }
+        return saldoTot;
+    }
+
+    public void stampaSaldi(String titolare) {
+        System.out.println("Saldi di " + titolare + ":");
+        for (ContoBancario conto : contiBancari) {
+            if (conto.getTitolare().equals(titolare)) {
+                System.out.println("- Conto: " + conto.getSaldo());
+            }
+        }
+    }
+
+
+   
+
 }
-
 
