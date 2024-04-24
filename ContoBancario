@@ -1,0 +1,43 @@
+package esercizioSistemaBancario;
+
+public class ContoBancario {
+
+	private String titolare;
+	private static double saldo;
+
+	public ContoBancario(String titolare, double saldo) {
+
+		this.titolare = titolare;
+		this.saldo = saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
+	public String getTitolare() {
+		return titolare;
+	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public static void deposita(double importo) {
+		saldo += importo;
+	}
+
+	public static void preleva(double importo) {
+		if (importo > saldo) {
+			System.out.println("Saldo insufficiente");
+		} else {
+			saldo -= importo;
+		}
+
+	}
+
+	
+	
+	
+
+}
