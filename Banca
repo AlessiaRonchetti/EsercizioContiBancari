@@ -1,0 +1,36 @@
+package esercizioSistemaBancario;
+import java.util.ArrayList;
+
+public class Banca {
+
+	 private ArrayList<ContoBancario> contiBancari;
+	
+	 public void aggiungiConto(ContoBancario conto) {
+		 
+		 contiBancari.add(conto);
+	 }
+	 
+	 public double getSaldoTotale() {
+		    double saldoTot = 0;
+		    
+		  
+
+		    for(ContoBancario conto : contiBancari) {
+		        saldoTot += conto.getSaldo();
+		    }
+		    
+		    return saldoTot;
+		}
+	 
+	 
+	 
+	 public void stampaSaldi() {
+		 
+		 for(ContoBancario conto : contiBancari) {
+		        
+			 System.out.println("Il saldo del seguente conto è: " + conto.getSaldo() + ". Il titolare si chiama: "+ conto.getTitolare());
+		    }
+	 }
+}
+
+
