@@ -4,17 +4,18 @@ java.util.ArrayList;
 public class TestBanca {
     public static void main(String[] args) {
         Banca banca = new Banca();
+        ArrayList<ContoBancario> contiBancari = new ArrayList<>();
+
         Scanner s = new Scanner(System.in);
         boolean continua = true;
 
         while (continua) {
             System.out.println("Ciao, come ti chiami?");
             String nomeTitolare = s.nextLine();
-            
 
-            for (ContoBancario conto : banca.getContiBancari()) {
+            for (ContoBancario conto : contiBancari) {
                 if (conto.getTitolare().equals(nomeTitolare)) {
-                  
+
                     System.out.println("Nome corretto, può accedere al suo conto.");
 
                     while (true) {
@@ -46,30 +47,30 @@ public class TestBanca {
                                 System.out.println("Scelta non valida.");
                         }
 
-                        if (!continua) break;
+                        if (!continua)
+                            break;
                     }
                 }
-            
 
-            else {
-                System.out.println("Nome errato");
-                System.out.println("Vuoi creare un nuovo conto in questa banca? (si/no)");
-                String risposta = s.nextLine();
+                else {
+                    System.out.println("Nome errato");
+                    System.out.println("Vuoi creare un nuovo conto in questa banca? (si/no)");
+                    String risposta = s.nextLine();
 
-                if (risposta.equalsIgnoreCase("si")) {
-                    System.out.println("Inserisci saldo iniziale:");
-                    double saldo = s.nextDouble();
-                    s.nextLine(); // Consuma il newline
-                    ContoBancario nuovoConto = new ContoBancario(nomeTitolare, saldo);
-                    banca.aggiungiConto(nuovoConto);
-                    System.out.println("Il nuovo conto è stato creato con successo.");
-                } else {
-                    continua = false;
+                    if (risposta.equalsIgnoreCase("si")) {
+                        System.out.println("Inserisci saldo iniziale:");
+                        double saldo = s.nextDouble();
+                        s.nextLine(); // Consuma il newline
+                        ContoBancario nuovoConto = new ContoBancario(nomeTitolare, saldo);
+                        banca.aggiungiConto(nuovoConto);
+                        System.out.println("Il nuovo conto è stato creato con successo.");
+                    } else {
+                        continua = false;
+                    }
                 }
             }
-        }
 
-        s.close();
-    }
+            s.close();
+        }
     }
 }
