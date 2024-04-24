@@ -1,0 +1,18 @@
+package esercizioSistemaBancario;
+
+public class ContoRisparmio extends ContoBancario{
+
+	private double tassoInteresse;
+
+	public ContoRisparmio(String titolare, double saldo, double tassoInteresse) {
+		super(titolare, saldo);
+		this.tassoInteresse = tassoInteresse;
+	}
+
+	
+	public void aggiungiInteresse() {
+        double interesse = getSaldo() * (tassoInteresse / 100);
+        double nuovoSaldo = getSaldo() + interesse;
+        setSaldo(nuovoSaldo);
+    }
+}
