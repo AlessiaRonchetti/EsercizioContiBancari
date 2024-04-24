@@ -10,11 +10,11 @@ public class TestBanca {
         while (continua) {
             System.out.println("Ciao, come ti chiami?");
             String nomeTitolare = s.nextLine();
-            boolean nomeTrovato = false;
+            
 
             for (ContoBancario conto : banca.getContiBancari()) {
                 if (conto.getTitolare().equals(nomeTitolare)) {
-                    nomeTrovato = true;
+                  
                     System.out.println("Nome corretto, può accedere al suo conto.");
 
                     while (true) {
@@ -49,9 +49,9 @@ public class TestBanca {
                         if (!continua) break;
                     }
                 }
-            }
+            
 
-            if (!nomeTrovato) {
+            else {
                 System.out.println("Nome errato");
                 System.out.println("Vuoi creare un nuovo conto in questa banca? (si/no)");
                 String risposta = s.nextLine();
@@ -70,5 +70,6 @@ public class TestBanca {
         }
 
         s.close();
+    }
     }
 }
